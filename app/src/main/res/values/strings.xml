@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">funnyApp</string>
+    <string name="btnBegin">Begin</string>
+    <string name="text">Press the button 100 times</string>
+    <string name="btnCount">100</string>
+    <string name="btn1">Joke</string>
+    <string name="todoItemTitle">itemTitle</string>
+    <string name="showOkHttpCall">show_OkHttp_Call</string>
+    <string name="showWebViewCall">show_WebView_Call</string>
+    <string name="webWork">Web work</string>
+    <string name="DBWork">Data Base Work</string>
+    <string name="choose_1_of">Choose 1 of... \n or\n press and hold this</string>
+    <string name="del">del</string>
+    <string name="try_again">Try again</string>
+</resources>
