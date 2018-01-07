@@ -46,9 +46,7 @@ public class AdapterOf extends BaseAdapter {
         ViewHolder holder = null;
         if(convertView == null){
             convertView = lInflater.inflate(R.layout.activity_workwithdb_item, parent, false);
-            holder = new ViewHolder();
-            holder.titleView = (TextView) convertView.findViewById(R.id.titleView);
-//            holder.del_Item = (Button) convertView.findViewById(R.id.del_Item);
+            holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
@@ -58,7 +56,11 @@ public class AdapterOf extends BaseAdapter {
     }
 }
 
- class ViewHolder{
+  class ViewHolder{
     public TextView titleView;
     public Button del_Item;
+      ViewHolder(View convertView){
+          titleView = (TextView) convertView.findViewById(R.id.titleView);
+          del_Item = (Button) convertView.findViewById(R.id.del_Item);
+      }
 }
