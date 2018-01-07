@@ -89,7 +89,7 @@ public class WorkWithDBActivity extends AppCompatActivity implements WorkWithDBA
             adapter = new AdapterOf(this, itemList);
             listView.setAdapter(adapter);
         }else {
-
+            adapter.setItemList(itemList);
             adapter.notifyDataSetChanged();
             animation = AnimationUtils.loadAnimation(this, R.anim.myalpha);
             listView.startAnimation(animation);

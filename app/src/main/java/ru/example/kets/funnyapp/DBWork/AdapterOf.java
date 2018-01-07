@@ -21,9 +21,15 @@ public class AdapterOf extends BaseAdapter {
   private LayoutInflater lInflater;
   private List<String> itemList;
 
+    public void setItemList(List<String> itemList) {
+        this.itemList = itemList;
+    }
+
     public AdapterOf(Context ctx, List<String> itemList) {
         this.ctx = ctx;
         this.itemList = itemList;
+        lInflater = (LayoutInflater) ctx
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
