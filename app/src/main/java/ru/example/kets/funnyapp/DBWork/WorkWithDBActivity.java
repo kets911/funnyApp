@@ -91,7 +91,6 @@ public class WorkWithDBActivity extends AppCompatActivity implements WorkWithDBA
         }else {
             adapter.setItemList(itemList);
             adapter.notifyDataSetChanged();
-            animation = AnimationUtils.loadAnimation(this, R.anim.myalpha);
             listView.startAnimation(animation);
         }
 
