@@ -1,31 +1,22 @@
 package ru.example.kets.funnyapp.DBWork;
 
 import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.DialogInterface;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import database.DBContract;
-import database.DBHelper;
-import ru.example.kets.funnyapp.DBWork.DBPresenter;
-import ru.example.kets.funnyapp.DBWork.DBPresenterInt;
 import ru.example.kets.funnyapp.R;
 
 /**
@@ -34,18 +25,22 @@ import ru.example.kets.funnyapp.R;
 
 public class WorkWithDBActivity extends AppCompatActivity implements WorkWithDBActivityInt{
     private DBPresenterInt presenter;
-    private AdapterOf adapter;
-    private ListView listView;
+    private RecycleAdapter adapter;
+    private RecyclerView recyclerList;
+    private RecyclerView.LayoutManager layoutManager;
     Animation animation;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workwithdb);
 
-        listView = (ListView) findViewById(R.id.list);
+        recyclerList = (RecyclerView) findViewById(R.id.recycleList);
+        recyclerList.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerList.setLayoutManager(layoutManager);
 
         animation = AnimationUtils.loadAnimation(this, R.anim.myalpha);
-        listView.startAnimation(animation);
+        recyclerList.startAnimation(animation);
         presenter = new DBPresenter(this);
     }
 
@@ -86,12 +81,12 @@ public class WorkWithDBActivity extends AppCompatActivity implements WorkWithDBA
 
     public void updateUI(List<String> itemList) {
         if(adapter==null){
-            adapter = new AdapterOf(this, itemList);
-            listView.setAdapter(adapter);
+            adapter = new RecycleAdapter(itemList);
+            recyclerList.setAdapter(adapter);
         }else {
-            adapter.setItemList(itemList);
+            adapter.setIemList(itemList);
             adapter.notifyDataSetChanged();
-            listView.startAnimation(animation);
+            recyclerList.startAnimation(animation);
         }
 
     }
