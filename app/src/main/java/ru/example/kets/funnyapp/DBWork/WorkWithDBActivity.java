@@ -34,7 +34,7 @@ import ru.example.kets.funnyapp.R;
 
 public class WorkWithDBActivity extends AppCompatActivity implements WorkWithDBActivityInt{
     private DBPresenterInt presenter;
-    private ArrayAdapter<String> adapter;
+    private AdapterOf adapter;
     private ListView listView;
     Animation animation;
     @Override
@@ -86,13 +86,11 @@ public class WorkWithDBActivity extends AppCompatActivity implements WorkWithDBA
 
     public void updateUI(List<String> itemList) {
         if(adapter==null){
-            adapter = new ArrayAdapter<>(this, R.layout.activity_workwithdb_item, R.id.titleView, itemList);
+            adapter = new AdapterOf(this, itemList);
             listView.setAdapter(adapter);
         }else {
-            adapter.clear();
-            adapter.addAll(itemList);
+            adapter.setItemList(itemList);
             adapter.notifyDataSetChanged();
-            animation = AnimationUtils.loadAnimation(this, R.anim.myalpha);
             listView.startAnimation(animation);
         }
 
