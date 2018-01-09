@@ -29,6 +29,7 @@ public class ShowWorkWithWebActivity extends AppCompatActivity implements ShowWo
         presenter = (WebWorkPresenter) getLastCustomNonConfigurationInstance();
         if(presenter == null) presenter = new WebWorkPresenter(this);
         else presenter.showMessages();
+
         webView  = (WebView) findViewById(R.id.webView);
         showWeb = (Button) findViewById(R.id.showWebViewCall);
         showOkHttp = (Button) findViewById(R.id.showOkHttpCall);
