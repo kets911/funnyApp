@@ -19,8 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".JokeActivity"/>
-        <activity android:name=".DBWork.WorkWithDBActivity" />
-        <activity android:name=".webWork.ShowWorkWithWebActivity" />
+        <activity android:name=".ShowMessageActivity" />
 
     </application>
 

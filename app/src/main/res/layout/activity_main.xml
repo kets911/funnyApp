@@ -29,12 +29,12 @@
         android:layout_marginBottom="20dp"/>
 
     <Button
-        android:id="@+id/btnDBWork"
+        android:id="@+id/btnShowMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:onClick="onClick"
-        android:text="@string/DBWork" />
+        android:text="@string/ShowMessages" />
 
     <Button
         android:id="@+id/btnWebWork"

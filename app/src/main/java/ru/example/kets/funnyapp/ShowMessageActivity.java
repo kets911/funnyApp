@@ -1,4 +1,4 @@
-package ru.example.kets.funnyapp.DBWork;
+package ru.example.kets.funnyapp;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -17,31 +17,31 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import ru.example.kets.funnyapp.R;
 
 /**
  * Created by kets on 12.09.2017.
  */
 
-public class WorkWithDBActivity extends AppCompatActivity implements WorkWithDBActivityInt{
-    private DBPresenterInt presenter;
+public class ShowMessageActivity extends AppCompatActivity implements ShowMessageActivityInt {
+    PresenterInterface presenter;
     private RecycleAdapter adapter;
-    private RecyclerView recyclerList;
+    private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     Animation animation;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_workwithdb);
+        setContentView(R.layout.activity_show_message);
 
-        recyclerList = (RecyclerView) findViewById(R.id.recycleList);
-        recyclerList.setHasFixedSize(true);
+        recyclerView = (RecyclerView) findViewById(R.id.recycleList);
+        recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
-        recyclerList.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(layoutManager);
 
         animation = AnimationUtils.loadAnimation(this, R.anim.myalpha);
-        recyclerList.startAnimation(animation);
-        presenter = new DBPresenter(this);
+        recyclerView.startAnimation(animation);
+        presenter = new Presenter(this);
+        presenter.showMessages();
     }
 
     @Override
@@ -72,29 +72,26 @@ public class WorkWithDBActivity extends AppCompatActivity implements WorkWithDBA
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String item = String.valueOf(editText.getText());
-                        presenter.insertIntoDB(item);
+//                        presenter.insertIntoDB(item);
                     }
                 })
                 .setNegativeButton("Cancel", null)
                 .create();
     }
 
-    public void updateUI(List<String> itemList) {
-        if(adapter==null){
-            adapter = new RecycleAdapter(itemList);
-            recyclerList.setAdapter(adapter);
+    public void updateUI(List<Message> messages) {
+        if(adapter == null){
+        recyclerView.setAdapter(new RecycleAdapter(messages));
         }else {
-            adapter.setIemList(itemList);
+            adapter.setMessages(messages);
             adapter.notifyDataSetChanged();
-            recyclerList.startAnimation(animation);
         }
-
     }
 
     public void deletItem(View v) {
-        View parent = (View) v.getParent();
-        TextView itemTextView = (TextView) parent.findViewById(R.id.titleView);
-        String item = String.valueOf(itemTextView.getText());
-        presenter.deletItem(item);
+//        View parent = (View) v.getParent();
+//        TextView itemTextView = (TextView) parent.findViewById(R.id.titleView);
+//        String item = String.valueOf(itemTextView.getText());
+//        presenter.deletItem(item);
     }
 }

@@ -1,27 +1,19 @@
-        package ru.example.kets.funnyapp.webWork;
+package ru.example.kets.funnyapp;
 
         import com.google.gson.annotations.Expose;
         import com.google.gson.annotations.SerializedName;
 
-        import java.util.List;
-
-        public class Messages {
-
-            private List<Messages> messages;
-
-            public Messages(List<Messages> messages){
-                this.messages = messages;
-            }
+        public class Message {
 
     @SerializedName("topic")
     @Expose
     private Integer topic;
     @SerializedName("title")
     @Expose
-    private String title;
+    private java.lang.String title;
     @SerializedName("text")
     @Expose
-    private String text;
+    private java.lang.String text;
     @SerializedName("message_id")
     @Expose
     private Integer messageId;
@@ -30,7 +22,7 @@
     private Integer userId;
     @SerializedName("user")
     @Expose
-    private String user;
+    private java.lang.String user;
     @SerializedName("time")
     @Expose
     private Integer time;
@@ -43,19 +35,19 @@
         this.topic = topic;
     }
 
-    public String getTitle() {
+    public java.lang.String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(java.lang.String title) {
         this.title = title;
     }
 
-    public String getText() {
+    public java.lang.String getText() {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(java.lang.String text) {
         this.text = text;
     }
 
@@ -75,11 +67,11 @@
         this.userId = userId;
     }
 
-    public String getUser() {
+    public java.lang.String getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(java.lang.String user) {
         this.user = user;
     }
 
@@ -91,17 +83,4 @@
         this.time = time;
     }
 
-            @Override
-            public String toString() {
-                StringBuilder sb = new StringBuilder();
-                for (Messages message : messages){
-                    sb.append("Title: ");
-                    sb.append(message.getTitle());
-                    sb.append("\n");
-                    sb.append("Text: ");
-                    sb.append(message.getText());
-                    sb.append("\n");
-                }
-                return sb.toString();
-            }
         }

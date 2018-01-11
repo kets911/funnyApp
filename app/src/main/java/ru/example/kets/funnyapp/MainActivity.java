@@ -10,9 +10,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import ru.example.kets.funnyapp.DBWork.WorkWithDBActivity;
-import ru.example.kets.funnyapp.webWork.ShowWorkWithWebActivity;
-
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -75,12 +72,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(this, JokeActivity.class);
 
                 break;
-            case R.id.btnDBWork:
-                intent = new Intent(this, WorkWithDBActivity.class);
+            case R.id.btnShowMessage:
+                intent = new Intent(this, ShowMessageActivity.class);
 
                 break;
             case R.id.btnWebWork:
-                intent = new Intent(this, ShowWorkWithWebActivity.class);
+//                intent = new Intent(this, ShowWorkWithWebActivity.class);
 
                 break;
         }
