@@ -2,6 +2,7 @@ package ru.example.kets.funnyapp;
 
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
 import io.reactivex.subscribers.DisposableSubscriber;
 
 /**
@@ -11,13 +12,14 @@ import io.reactivex.subscribers.DisposableSubscriber;
 public class Presenter implements PresenterInterface {
     private MessageProviderInt messageProvider;
     private ShowMessageActivityInt view;
-    Presenter(ShowMessageActivity view){
+    private Disposable disposable;
+    public Presenter(ShowMessageActivity view){
         this.view = view;
         messageProvider = new MessageMessageProvider();
     }
 
     public void showMessages(){
-        messageProvider.getMessageProvider()
+        disposable = messageProvider.getMessageProvider()
                 .subscribeWith(new DisposableSubscriber<List<Message>>() {
                     @Override
                     public void onNext(List<Message> messages) {
@@ -34,5 +36,9 @@ public class Presenter implements PresenterInterface {
 
                     }
                 });
+    }
+
+    public void dispose(){
+        disposable.dispose();
     }
 }

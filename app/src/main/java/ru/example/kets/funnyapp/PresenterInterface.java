@@ -6,4 +6,5 @@ package ru.example.kets.funnyapp;
 
 public interface PresenterInterface {
     void showMessages();
+    void dispose();
 }

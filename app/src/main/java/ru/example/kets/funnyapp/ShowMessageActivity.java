@@ -94,4 +94,10 @@ public class ShowMessageActivity extends AppCompatActivity implements ShowMessag
 //        String item = String.valueOf(itemTextView.getText());
 //        presenter.deletItem(item);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.dispose();
+    }
 }
