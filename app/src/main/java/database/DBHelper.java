@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.example.kets.funnyapp.Message;
+
 /**
  * Created by kets on 13.09.2017.
  */
@@ -22,7 +24,8 @@ public class DBHelper extends SQLiteOpenHelper implements DBHelperInt{
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " +DBContract.Entry.TABLE + " ( "+ DBContract.Entry._ID +
-                " INTEGER PRIMARY KEY AUTOINCREMENT, " +DBContract.Entry.COL_TITLE+ " TEXT NOT NULL);");
+                " INTEGER PRIMARY KEY AUTOINCREMENT, " +DBContract.Entry.COL_TITLE+ " TEXT NOT NULL, "
+                + DBContract.Entry.COL_MESSAGE + " TEXT NOT NULL);");
     }
 
     @Override
@@ -30,33 +33,38 @@ public class DBHelper extends SQLiteOpenHelper implements DBHelperInt{
         db.execSQL("DROP TABLE IF EXISTS " + DBContract.Entry.TABLE);
         onCreate(db);
     }
-    public void insertIntoDB(String item){
+    public void insertIntoDB(Message message){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(DBContract.Entry.COL_TITLE, item);
+        cv.put(DBContract.Entry.COL_TITLE, message.getTitle());
+        cv.put(DBContract.Entry.COL_MESSAGE, message.getText());
         db.insertWithOnConflict(DBContract.Entry.TABLE, null, cv, SQLiteDatabase.CONFLICT_REPLACE);
         db.close();
     }
 
     @Override
-    public void deletItem(String item) {
+    public void deletItem(String title) {
         SQLiteDatabase db = getWritableDatabase();
-        db.delete(DBContract.Entry.TABLE, DBContract.Entry.COL_TITLE + " = ? ", new String[] {item});
+        db.delete(DBContract.Entry.TABLE, DBContract.Entry.COL_TITLE + " = ? ", new String[] {title});
         db.close();
     }
 
     @Override
-    public List<String> getUpdatedList() {
-        List<String> itemList = new ArrayList<>();
+    public List<Message> getUpdatedList() {
+        List<Message> messages = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(DBContract.Entry.TABLE, new String[] {DBContract.Entry._ID, DBContract.Entry.COL_TITLE}, null, null, null, null, null);
+        Cursor cursor = db.query(DBContract.Entry.TABLE, new String[] {DBContract.Entry._ID, DBContract.Entry.COL_TITLE, DBContract.Entry.COL_MESSAGE}, null, null, null, null, null);
         while (cursor.moveToNext()){
-            int idx = cursor.getColumnIndex(DBContract.Entry.COL_TITLE);
-            itemList.add(cursor.getString(idx));
+            Message msg = new Message();
+            int titleIdx = cursor.getColumnIndex(DBContract.Entry.COL_TITLE);
+            int messageIdx = cursor.getColumnIndex(DBContract.Entry.COL_MESSAGE);
+            msg.setTitle(cursor.getString(titleIdx));
+            msg.setText(cursor.getString(messageIdx));
+            messages.add(msg);
         }
         cursor.close();
         db.close();
-        return itemList;
+        return messages;
     }
 
 }

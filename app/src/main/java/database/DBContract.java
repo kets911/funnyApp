@@ -7,11 +7,12 @@ import android.provider.BaseColumns;
  */
 
 public class DBContract {
-    public static final String DB_NAME = "MyBase";
+    public static final String DB_NAME = "MessageBase";
     public static final int DB_VERSION = 1;
 
 public class Entry implements BaseColumns {
     public static final String TABLE = "MyTable";
     public static final String COL_TITLE = "title";
+    public static final String COL_MESSAGE = "message";
 }
 }

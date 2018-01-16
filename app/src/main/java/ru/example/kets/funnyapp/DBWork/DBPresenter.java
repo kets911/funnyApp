@@ -30,8 +30,8 @@
 //    }
 //
 //    @Override
-//    public void deletItem(String item) {
-//        dbHelper.deletItem(item);
+//    public void deletMessage(String item) {
+//        dbHelper.deletMessage(item);
 //        updateUI();
 //    }
 //

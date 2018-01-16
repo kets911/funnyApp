@@ -9,6 +9,6 @@ import java.util.List;
  */
 
 public interface ShowMessageActivityInt {
-    void deletItem(View v);
+    void deletMessage(View v);
     void updateUI(List<Message> itemList);
 }

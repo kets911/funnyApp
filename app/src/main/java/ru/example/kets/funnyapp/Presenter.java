@@ -1,7 +1,13 @@
 package ru.example.kets.funnyapp;
 
+import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
+
 import java.util.List;
 
+import database.DBHelper;
+import database.DBHelperInt;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subscribers.DisposableSubscriber;
 
@@ -13,13 +19,15 @@ public class Presenter implements PresenterInterface {
     private MessageProviderInt messageProvider;
     private ShowMessageActivityInt view;
     private Disposable disposable;
-    public Presenter(ShowMessageActivity view){
+    DBHelperInt dbHelper;
+    public Presenter(ShowMessageActivity view, DBHelper dbHelper, MessageProvider messageProvider){
         this.view = view;
-        messageProvider = new MessageMessageProvider();
+        this.dbHelper = dbHelper;
+        this.messageProvider = messageProvider;
     }
 
     public void showMessages(){
-        disposable = messageProvider.getMessageProvider()
+        disposable = (Disposable) messageProvider.getMessageProvider()
                 .subscribeWith(new DisposableSubscriber<List<Message>>() {
                     @Override
                     public void onNext(List<Message> messages) {
@@ -28,7 +36,9 @@ public class Presenter implements PresenterInterface {
 
                     @Override
                     public void onError(Throwable t) {
-
+                        Log.d("funnyAppLog", "Some Error= "+ t);
+                        Toast.makeText(((Context)view), "Some Error= "+ t, Toast.LENGTH_LONG).show();
+                        view.updateUI(dbHelper.getUpdatedList());
                     }
 
                     @Override
@@ -36,6 +46,12 @@ public class Presenter implements PresenterInterface {
 
                     }
                 });
+    }
+
+    @Override
+    public void deletMessage(String title) {
+        dbHelper.deletItem(title);
+        view.updateUI(dbHelper.getUpdatedList());
     }
 
     public void dispose(){

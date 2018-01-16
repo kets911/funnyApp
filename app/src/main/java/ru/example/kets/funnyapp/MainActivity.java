@@ -76,10 +76,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(this, ShowMessageActivity.class);
 
                 break;
-            case R.id.btnWebWork:
-//                intent = new Intent(this, ShowWorkWithWebActivity.class);
-
-                break;
         }
         startActivity(intent);
     }
