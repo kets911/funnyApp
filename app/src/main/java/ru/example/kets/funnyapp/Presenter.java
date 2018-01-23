@@ -4,10 +4,13 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import database.DBHelper;
 import database.DBHelperInt;
+import io.reactivex.Flowable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subscribers.DisposableSubscriber;
 
@@ -46,6 +49,7 @@ public class Presenter implements PresenterInterface {
 
                     }
                 });
+
     }
 
     @Override

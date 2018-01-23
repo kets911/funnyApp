@@ -1,5 +1,7 @@
 package ru.example.kets.funnyapp.Dagger;
 
+import javax.inject.Inject;
+
 import dagger.Component;
 import ru.example.kets.funnyapp.Presenter;
 

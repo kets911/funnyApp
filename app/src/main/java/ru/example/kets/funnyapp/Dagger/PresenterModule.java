@@ -12,19 +12,11 @@ import ru.example.kets.funnyapp.ShowMessageActivity;
 /**
  * Created by kets on 16.01.2018.
  */
-@Module(includes = ContextModule.class)
+@Module(includes = {ContextModule.class, DBHelperModule.class, MessageProviderModule.class})
 public class PresenterModule {
     @Provides
     Presenter getPresenter(ShowMessageActivity view, DBHelper dbHelper, MessageProvider messageProvider){
         return new Presenter(view, dbHelper, messageProvider);
-    }
-    @Provides
-    DBHelper getDBHelper(Context context){
-        return new DBHelper(context.getApplicationContext());
-    }
-    @Provides
-    MessageProvider getMessageProvider(DBHelper dbHelper){
-        return new MessageProvider(dbHelper);
     }
     @Provides
     ShowMessageActivity getShowMessageActivity(Context context){
