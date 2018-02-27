@@ -11,4 +11,5 @@ import java.util.List;
 public interface ShowMessageActivityInt {
     void deletMessage(View v);
     void updateUI(List<Message> itemList);
+    void showError(Throwable t);
 }

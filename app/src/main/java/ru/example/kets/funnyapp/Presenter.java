@@ -23,7 +23,7 @@ public class Presenter implements PresenterInterface {
     private ShowMessageActivityInt view;
     private Disposable disposable;
     DBHelperInt dbHelper;
-    public Presenter(ShowMessageActivity view, DBHelper dbHelper, MessageProvider messageProvider){
+    public Presenter(ShowMessageActivityInt view, DBHelperInt dbHelper, MessageProviderInt messageProvider){
         this.view = view;
         this.dbHelper = dbHelper;
         this.messageProvider = messageProvider;
@@ -36,11 +36,10 @@ public class Presenter implements PresenterInterface {
                     public void onNext(List<Message> messages) {
                         view.updateUI(messages);
                     }
-
                     @Override
                     public void onError(Throwable t) {
                         Log.d("funnyAppLog", "Some Error= "+ t);
-                        Toast.makeText(((Context)view), "Some Error= "+ t, Toast.LENGTH_LONG).show();
+                        view.showError(t);
                         view.updateUI(dbHelper.getUpdatedList());
                     }
 

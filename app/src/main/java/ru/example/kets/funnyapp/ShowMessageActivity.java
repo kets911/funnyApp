@@ -14,6 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -66,6 +67,11 @@ public class ShowMessageActivity extends AppCompatActivity implements ShowMessag
         TextView itemTitleView = (TextView) parent.findViewById(R.id.titleView);
         String title = String.valueOf(itemTitleView.getText());
         presenter.deletMessage(title);
+    }
+
+    @Override
+    public void showError(Throwable t) {
+        Toast.makeText(this, "Some Error= "+ t, Toast.LENGTH_LONG).show();
     }
 
     @Override

@@ -8,6 +8,7 @@ import java.util.List;
 
 import dagger.Module;
 import database.DBHelper;
+import database.DBHelperInt;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -19,11 +20,12 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class MessageProvider implements MessageProviderInt<List<Message>> {
-    DBHelper dbHelper;
-    public MessageProvider(DBHelper dbHelper){
+    MessageApi messageApi;
+    DBHelperInt dbHelper;
+    public MessageProvider(DBHelperInt dbHelper, MessageApi messageApi){
+        this.messageApi = messageApi;
         this.dbHelper = dbHelper;
     }
-    private MessageApi messageApi = new MessageRetrofit("http://annimon.com").getRetrofit().create(MessageApi.class);
     public Flowable<List<Message>> getMessageProvider(){
          return messageApi.getLastMessages().cache()
                 .subscribeOn(Schedulers.io())
